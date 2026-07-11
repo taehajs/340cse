@@ -16,19 +16,19 @@ app.set('views', path.join(__dirname, 'src/views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', { title: 'Home' });
 });
 
 app.get('/organizations', (req, res) => {
-    res.render('organizations');
+    res.render('organizations', { title: 'Organizations' });
 });
 
 app.get('/projects', (req, res) => {
-    res.render('projects');
+    res.render('projects', { title: 'Projects' });
 });
 
 app.get('/categories', (req, res) => {
-    res.render('categories');
+    res.render('categories', { title: 'Categories' });
 });
 
 app.listen(PORT, () => {
