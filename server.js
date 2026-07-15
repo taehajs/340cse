@@ -3,7 +3,8 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
-import { getAllCategories } from './src/models/categories.js'; // Added import
+import { getAllCategories } from './src/models/categories.js';
+import { getAllProjects } from './src/models/projects.js';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 const PORT = process.env.PORT || 3000;
@@ -23,21 +24,29 @@ app.get('/', (req, res) => {
 });
 
 app.get('/organizations', async (req, res) => {
-    const organizations = await getAllOrganizations();
-    const title = 'Our Partner Organizations';
-    res.render('organizations', { title, organizations });
+    try {
+        const organizations = await getAllOrganizations();
+        res.render('organizations', { title: 'Our Partner Organizations', organizations });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
-app.get('/projects', (req, res) => {
-    res.render('projects', { title: 'Projects' });
+app.get('/projects', async (req, res) => {
+    try {
+        const projects = await getAllProjects();
+        res.render('projects', { title: 'Projects', projects });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
-// Updated Route for Categories
 app.get('/categories', async (req, res) => {
     try {
         const categories = await getAllCategories();
-        const title = 'Service Project Categories';
-        res.render('categories', { title, categories });
+        res.render('categories', { title: 'Service Project Categories', categories });
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -45,11 +54,11 @@ app.get('/categories', async (req, res) => {
 });
 
 app.listen(PORT, async () => {
-  try {
-    await testConnection();
-    console.log(`Server is running at http://127.0.0.1:${PORT}`);
-    console.log(`Environment: ${NODE_ENV}`);
-  } catch (error) {
-    console.error('Error connecting to the database:', error);
-  }
+    try {
+        await testConnection();
+        console.log(`Server is running at http://127.0.0.1:${PORT}`);
+        console.log(`Environment: ${NODE_ENV}`);
+    } catch (error) {
+        console.error('Error connecting to the database:', error);
+    }
 });

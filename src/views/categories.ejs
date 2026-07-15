@@ -1,16 +1,40 @@
-<%- include('partials/header') %>
-<main>
-    <h2><%= title %></h2>
-    <p>Explore our projects by browsing through the service categories below:</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Project Categories - CSE 340</title>
+</head>
+<body>
+    <header>
+        <h1>CSE 340 Web Development</h1>
+        <nav>
+            <a href="/">Home</a> | 
+            <a href="/organizations">Organizations</a> | 
+            <a href="/projects">Projects</a> | 
+            <a href="/categories">Categories</a>
+        </nav>
+        <hr>
+    </header>
     
-    <div class="category-list" style="margin-top: 20px;">
-        <ul style="list-style-type: none; padding: 0;">
-            <% categories.forEach(category => { %>
-                <li style="padding: 12px 18px; margin-bottom: 10px; background-color: #f4f4f4; border-left: 5px solid #007bff; border-radius: 4px; font-weight: bold; font-size: 1.1em;">
-                    <%= category.name %>
-                </li>
-            <% }); %>
+    <main>
+        <h2>Service Project Categories</h2>
+        <p>Explore our projects by browsing through the service categories below:</p>
+        
+        <ul>
+            <% if (categories && categories.length > 0) { %>
+                <% categories.forEach(category => { %>
+                    <li><strong><%= category.name %></strong></li>
+                <% }); %>
+            <% } else { %>
+                <li>No categories found in database.</li>
+            <% } %>
         </ul>
-    </div>
-</main>
-<%- include('partials/footer') %>
+    </main>
+    
+    <hr>
+    <footer>
+        <p>© 2026 CSE 340 Assignment. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,12 +1,12 @@
-import db from './db.js';
+import pool from './db.js';
 
 export async function getAllCategories() {
+    const queryText = 'SELECT category_id, name FROM category ORDER BY name ASC';
     try {
-        const sql = 'SELECT * FROM categories ORDER BY name ASC';
-        const result = await db.query(sql);
+        const result = await pool.query(queryText);
         return result.rows;
     } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error("Error fetching categories in model:", error);
         throw error;
     }
 }
