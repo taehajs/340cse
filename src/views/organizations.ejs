@@ -1,26 +1,17 @@
 <%- include('partials/header') %>
 <main>
-    <h2>Our Partner Organizations</h2>
+    <h2><%= title %></h2>
     <p>We collaborate with various organizations to make a difference in our community.</p>
     
     <div class="organization-list" style="margin-top: 20px;">
-        <section class="org-item" style="margin-bottom: 30px;">
-            <h3>1. Red Cross Community</h3>
-            <p>Providing emergency assistance, disaster relief, and disaster preparedness education.</p>
-            <img src="/images/org1.png" alt="Red Cross" style="max-width: 250px; height: auto; border-radius: 4px;">
-        </section>
-
-        <section class="org-item" style="margin-bottom: 30px;">
-            <h3>2. Eco Green Network</h3>
-            <p>Focused on environmental preservation, local cleanups, and tree-planting projects.</p>
-            <img src="/images/org2.png" alt="Eco Green" style="max-width: 250px; height: auto; border-radius: 4px;">
-        </section>
-
-        <section class="org-item">
-            <h3>3. Local Youth Mentors</h3>
-            <p>Empowering local students through free tutoring, educational workshops, and guidance.</p>
-            <img src="/images/org3.png" alt="Youth Mentors" style="max-width: 250px; height: auto; border-radius: 4px;">
-        </section>
+        <% organizations.forEach(organization => { %>
+            <section class="org-item" style="margin-bottom: 30px;">
+                <h3><%= organization.name %></h3>
+                <p><%= organization.description %></p>
+                <p>Contact: <a href="mailto:<%= organization.contact_email %>"><%= organization.contact_email %></a></p>
+                <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo" style="max-width: 250px; height: auto; border-radius: 4px;">
+            </section>
+        <% }); %>
     </div>
 </main>
 <%- include('partials/footer') %>
