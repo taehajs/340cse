@@ -1,12 +1,16 @@
 <%- include('partials/header') %>
 <main>
-    <h2>Service Project Categories</h2>
-    <p>Browse volunteer projects by their focus area.</p>
-    <ul>
-        <li>Environment</li>
-        <li>Educational</li>
-        <li>Community Service</li>
-        <li>Health and Wellness</li>
-    </ul>
+    <h2><%= title %></h2>
+    <p>Explore our projects by browsing through the service categories below:</p>
+    
+    <div class="category-list" style="margin-top: 20px;">
+        <ul style="list-style-type: none; padding: 0;">
+            <% categories.forEach(category => { %>
+                <li style="padding: 12px 18px; margin-bottom: 10px; background-color: #f4f4f4; border-left: 5px solid #007bff; border-radius: 4px; font-weight: bold; font-size: 1.1em;">
+                    <%= category.name %>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
 </main>
 <%- include('partials/footer') %>
