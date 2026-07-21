@@ -1,20 +1,22 @@
 <%- include('partials/header') %>
+
 <main>
-    <h2>Service Projects</h2>
-    <p>Explore the projects led by our volunteers and students.</p>
-    
-    <div class="project-list">
-        <ul>
-            <li>
-                <strong>Project Clean Marine:</strong> A coastal preservation project aiming to remove plastics from local beaches.
-            </li>
-            <li>
-                <strong>Code for Kids:</strong> Hosting weekend workshops to teach basic web development skills to underprivileged children.
-            </li>
-            <li>
-                <strong>Senior Care Connectivity:</strong> Helping elderly residents learn how to use modern digital devices to connect with family.
-            </li>
-        </ul>
+    <h2><%= title %></h2>
+
+    <div class="project-list" style="margin-top: 20px;">
+        <% projects.forEach(project => { %>
+            <section class="project-item" style="margin-bottom: 25px;">
+                <h3>
+                    <a href="/projects/<%= project.project_id %>">
+                        <%= project.title %>
+                    </a>
+                </h3>
+                <p><%= project.description %></p>
+                <p><strong>Location:</strong> <%= project.location %></p>
+                <p><strong>Date:</strong> <%= project.date %></p>
+            </section>
+        <% }); %>
     </div>
 </main>
+
 <%- include('partials/footer') %>

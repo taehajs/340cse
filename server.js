@@ -3,8 +3,8 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
-import { getAllCategories } from './src/models/categories.js';
-import { getAllProjects } from './src/models/projects.js';
+import { getAllCategories, getCategoryById, getCategoriesByProjectId } from './src/models/categories.js';
+import { getAllProjects, getProjectById, getProjectsByCategoryId } from './src/models/projects.js';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 const PORT = process.env.PORT || 3000;
@@ -43,10 +43,40 @@ app.get('/projects', async (req, res) => {
     }
 });
 
+app.get('/projects/:id', async (req, res) => {
+    try {
+        const projectId = req.params.id;
+        const project = await getProjectById(projectId);
+        if (!project) {
+            return res.status(404).send('Project Not Found');
+        }
+        const categories = await getCategoriesByProjectId(projectId);
+        res.render('project-detail', { title: project.title, project, categories });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 app.get('/categories', async (req, res) => {
     try {
         const categories = await getAllCategories();
         res.render('categories', { title: 'Service Project Categories', categories });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.get('/categories/:id', async (req, res) => {
+    try {
+        const categoryId = req.params.id;
+        const category = await getCategoryById(categoryId);
+        if (!category) {
+            return res.status(404).send('Category Not Found');
+        }
+        const projects = await getProjectsByCategoryId(categoryId);
+        res.render('category-detail', { title: `${category.name} Projects`, category, projects });
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');

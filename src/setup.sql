@@ -54,13 +54,11 @@ INSERT INTO project (organization_id, title, description, location, date) VALUES
 (1, 'First Aid Training', 'Get certified in CPR and basic first aid.', 'Downtown Center', '2026-08-15'),
 (1, 'Food Pantry Drive', 'Distributing non-perishable food to families.', 'West Side Church', '2026-09-01'),
 (1, 'Senior Care Visit', 'Spending time and helping out at the local senior center.', 'Sunnyvale Home', '2026-09-10'),
-
 (2, 'City Park Clean-up', 'Picking up trash and planting flowers in the central park.', 'Central Park', '2026-07-25'),
 (2, 'River Cleanup Day', 'Cleaning the banks of the Han River.', 'Han River Park', '2026-08-12'),
 (2, 'Tree Planting Initiative', 'Help us plant 100 trees in the community forest.', 'Greenwood Forest', '2026-08-22'),
 (2, 'Recycling Drive', 'Collecting electronic waste for proper recycling.', 'Eco Center', '2026-09-05'),
 (2, 'Community Garden Setup', 'Building raised beds for the new community garden.', 'East District Lot', '2026-09-18'),
-
 (3, 'Coding Bootcamp Mentor', 'Teach basic HTML/CSS to middle school students.', 'Tech Hub Library', '2026-07-28'),
 (3, 'Math Tutoring Session', 'Help high school students prepare for their exams.', 'Study Smart Center', '2026-08-08'),
 (3, 'Career Day Panel', 'Share your career journey with local youth.', 'Civic Center Auditorium', '2026-08-19'),
