@@ -7,7 +7,8 @@ CREATE TABLE organization (
     organization_id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
-    contact_email VARCHAR(255)
+    contact_email VARCHAR(255),
+    logo_filename VARCHAR(255)
 );
 
 CREATE TABLE project (
@@ -42,10 +43,10 @@ CREATE TABLE project_category (
         ON DELETE CASCADE
 );
 
-INSERT INTO organization (name, description, contact_email) VALUES
-('Red Cross', 'Disaster relief and community support.', 'contact@redcross.org'),
-('Green Earth', 'Environmental conservation and clean-up.', 'info@greenearth.org'),
-('Youth Mentors', 'Education and mentoring for teenagers.', 'hello@youthmentors.org');
+INSERT INTO organization (name, description, contact_email, logo_filename) VALUES
+('Red Cross', 'Disaster relief and community support.', 'contact@redcross.org', 'org1.png'),
+('Green Earth', 'Environmental conservation and clean-up.', 'info@greenearth.org', 'org2.png'),
+('Youth Mentors', 'Education and mentoring for teenagers.', 'hello@youthmentors.org', 'org3.png');
 
 INSERT INTO project (organization_id, title, description, location, date) VALUES
 (1, 'Blood Drive 2026', 'Annual summer blood donation campaign.', 'Community Hall', '2026-07-20'),
