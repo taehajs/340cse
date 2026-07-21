@@ -6,6 +6,7 @@ export async function renderCategories(req, res, next) {
         const categories = await getAllCategories();
         res.render('categories', { title: 'Service Project Categories', categories });
     } catch (error) {
+        console.error("renderCategories Error:", error);
         next(error);
     }
 }
@@ -19,9 +20,10 @@ export async function renderCategoryDetail(req, res, next) {
             err.status = 404;
             return next(err);
         }
-        const projects = await getProjectsByCategoryId(categoryId);
+        const projects = await getProjectsByCategoryId(categoryId) || [];
         res.render('category-detail', { title: `${category.name} Projects`, category, projects });
     } catch (error) {
+        console.error("renderCategoryDetail Error:", error);
         next(error);
     }
 }
