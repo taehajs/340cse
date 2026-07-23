@@ -9,7 +9,16 @@
                 <h3><%= organization.name %></h3>
                 <p><%= organization.description %></p>
                 <p>Contact: <a href="mailto:<%= organization.contact_email %>"><%= organization.contact_email %></a></p>
-                <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo" style="max-width: 250px; height: auto; border-radius: 4px;">
+            
+                <div class="org-logo-container" style="margin-top: 10px;">
+                    <a href="<%= organization.website_url || '#' %>" target="_blank" rel="noopener noreferrer">
+                        <img 
+                            src="/images/<%= organization.logo_filename %>" 
+                            alt="<%= organization.name %> logo" 
+                            style="max-width: 250px; height: auto; border-radius: 4px; display: block;"
+                        >
+                    </a>
+                </div>
             </section>
         <% }); %>
     </div>

@@ -1,9 +1,12 @@
 import express from 'express';
-import { renderCategories, renderCategoryDetail } from '../controllers/categoryController.js';
+import { 
+    showProjectsPage, 
+    showProjectDetailsPage 
+} from '../controllers/projectController.js';
 
 const router = express.Router();
 
-router.get('/categories', renderCategories);
-router.get('/categories/:id', renderCategoryDetail); 
+router.get('/projects', showProjectsPage);
+router.get('/project/:id', showProjectDetailsPage); // 또는 /projects/:id
 
 export default router;
