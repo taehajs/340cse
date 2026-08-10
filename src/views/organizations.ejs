@@ -13,11 +13,18 @@
                 <div class="org-logo-container" style="margin-top: 10px;">
                     <a href="<%= organization.website_url || '#' %>" target="_blank" rel="noopener noreferrer">
                         <% 
-                            let cleanFilename = organization.logo_filename || '';
-                            cleanFilename = cleanFilename.replace(/^\/?(images\/)?/, '');
+                            // DB의 logo_filename에서 경로 구분자 및 기존 확장자를 제거하고 순수 파일명(org1 등)만 추출
+                            let rawName = organization.logo_filename || '';
+                            let baseName = rawName.replace(/^\/?(images\/)?/, '').replace(/\.[^/.]+$/, '');
+                            
+                            // fallback: baseName이 없으면 기본값 org1
+                            if (!baseName) baseName = 'org1';
+                            
+                            // public/images/ 안의 실제 파일명 형식(org1.png 등)으로 정확하게 매핑
+                            let finalFileName = baseName + '.png';
                         %>
                         <img 
-                            src="/images/<%= cleanFilename %>" 
+                            src="/images/<%= finalFileName %>" 
                             alt="<%= organization.name %> logo" 
                             style="max-width: 250px; height: auto; border-radius: 4px; display: block;"
                         >
