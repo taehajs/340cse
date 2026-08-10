@@ -12,8 +12,12 @@
             
                 <div class="org-logo-container" style="margin-top: 10px;">
                     <a href="<%= organization.website_url || '#' %>" target="_blank" rel="noopener noreferrer">
+                        <% 
+                            let cleanFilename = organization.logo_filename || '';
+                            cleanFilename = cleanFilename.replace(/^\/?(images\/)?/, '');
+                        %>
                         <img 
-                            src="/images/<%= organization.logo_filename %>" 
+                            src="/images/<%= cleanFilename %>" 
                             alt="<%= organization.name %> logo" 
                             style="max-width: 250px; height: auto; border-radius: 4px; display: block;"
                         >
