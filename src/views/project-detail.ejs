@@ -1,7 +1,9 @@
 <%- include('partials/header') %>
 <main>
     <h2><%= project.title %></h2>
-    <p><strong>Organization:</strong> <%= project.organization_name %></p>
+    <p><strong>Organization:</strong> 
+        <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a>
+    </p>
     <p><strong>Date:</strong> <%= new Date(project.date).toLocaleDateString() %></p>
     <p><strong>Location:</strong> <%= project.location %></p>
     <p><%= project.description %></p>
@@ -18,5 +20,7 @@
             <span>None</span>
         <% } %>
     </div>
+
+    <a href="/projects" style="display: inline-block; margin-top: 20px;">← Back to Projects List</a>
 </main>
 <%- include('partials/footer') %>

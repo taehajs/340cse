@@ -6,21 +6,20 @@
     <div class="organization-list" style="margin-top: 20px;">
         <% organizations.forEach(organization => { %>
             <section class="org-item" style="margin-bottom: 30px;">
-                <h3><%= organization.name %></h3>
+                <h3>
+                    <a href="/organization/<%= organization.organization_id %>">
+                        <%= organization.name %>
+                    </a>
+                </h3>
                 <p><%= organization.description %></p>
                 <p>Contact: <a href="mailto:<%= organization.contact_email %>"><%= organization.contact_email %></a></p>
             
                 <div class="org-logo-container" style="margin-top: 10px;">
-                    <a href="<%= organization.website_url || '#' %>" target="_blank" rel="noopener noreferrer">
+                    <a href="/organization/<%= organization.organization_id %>">
                         <% 
-                            // DB의 logo_filename에서 경로 구분자 및 기존 확장자를 제거하고 순수 파일명(org1 등)만 추출
                             let rawName = organization.logo_filename || '';
                             let baseName = rawName.replace(/^\/?(images\/)?/, '').replace(/\.[^/.]+$/, '');
-                            
-                            // fallback: baseName이 없으면 기본값 org1
                             if (!baseName) baseName = 'org1';
-                            
-                            // public/images/ 안의 실제 파일명 형식(org1.png 등)으로 정확하게 매핑
                             let finalFileName = baseName + '.png';
                         %>
                         <img 
