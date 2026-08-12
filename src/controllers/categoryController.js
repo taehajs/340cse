@@ -6,11 +6,43 @@ import {
 } from '../models/categories.js';
 import { getProjectsByCategoryId } from '../models/projects.js';
 
-// 기존 renderCategories, renderCategoryDetail 코드 유지...
 
-/**
- * 카테고리 생성 폼 렌더링
- */
+export async function renderCategories(req, res, next) {
+    try {
+        const categories = await getAllCategories();
+        res.render('categories', { title: 'Service Project Categories', categories });
+    } catch (error) {
+        console.error("renderCategories Error:", error);
+        next(error);
+    }
+}
+
+
+export async function renderCategoryDetail(req, res, next) {
+    try {
+        const categoryId = req.params.id;
+        const category = await getCategoryById(categoryId);
+
+        if (!category) {
+            const err = new Error('Category Not Found');
+            err.status = 404;
+            return next(err);
+        }
+
+        const projects = await getProjectsByCategoryId(categoryId) || [];
+
+        res.render('category-detail', { 
+            title: `${category.name} Projects`, 
+            category, 
+            projects 
+        });
+    } catch (error) {
+        console.error("renderCategoryDetail Error:", error);
+        next(error);
+    }
+}
+
+
 export async function renderAddCategoryForm(req, res, next) {
     try {
         res.render('new-category', { 
@@ -23,9 +55,7 @@ export async function renderAddCategoryForm(req, res, next) {
     }
 }
 
-/**
- * 카테고리 생성 처리 (POST)
- */
+
 export async function handleAddCategory(req, res, next) {
     try {
         const { name } = req.body;
@@ -56,9 +86,7 @@ export async function handleAddCategory(req, res, next) {
     }
 }
 
-/**
- * 카테고리 수정 폼 렌더링 (Pre-populate existing data)
- */
+
 export async function renderEditCategoryForm(req, res, next) {
     try {
         const categoryId = req.params.id;

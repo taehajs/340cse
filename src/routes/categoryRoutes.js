@@ -6,9 +6,10 @@ import {
     handleAddCategory,
     renderEditCategoryForm,
     handleEditCategory
-} from '../controllers/categoryController.js'; 
+} from '../controllers/categoryController.js';
 
 const router = express.Router();
+
 
 router.get('/categories', renderCategories);
 router.get('/category/:id', renderCategoryDetail);
